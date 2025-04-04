@@ -1,4 +1,5 @@
 #pragma once
+#include "macros.h"
 #include "HardwareConfig.h"
 
 #define FIRMWARE_NAME "Zaehlermodul"

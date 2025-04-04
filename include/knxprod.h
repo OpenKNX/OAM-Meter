@@ -20,7 +20,7 @@
 #define SML_ModuleVersion 1
 #define BI_ModuleVersion 2
 #define BTN_ModuleVersion 5
-#define LOG_ModuleVersion 52
+#define LOG_ModuleVersion 51
 // Parameter with single occurrence
 
 
