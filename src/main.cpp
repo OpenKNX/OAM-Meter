@@ -7,6 +7,7 @@
 #include "GpioBinaryInputModule.h"
 #include "Logic.h"
 #include "MeterModule.h"
+#include "NetworkModule.h"
 #include "OpenKNX.h"
 #include "SMLModule.h"
 #ifdef ARDUINO_ARCH_RP2040
@@ -19,6 +20,7 @@
     #include "SMLSamples.h"
 #endif
 
+#define PIO_BUFFER 64U
 #ifdef DEVICE_DISPLAY_MODULE
     #include "DeviceDisplay.h"
 #endif
@@ -647,6 +649,9 @@ void setup()
 #if defined(OPENKNX_BI_GPIO_PINS) && OPENKNX_BI_GPIO_COUNT > 0 && BI_ChannelCount > 0
     openknx.addModule(6, openknxGpioBinaryInputModule);
 #endif
+#if MASK_VERSION == 0x57B0
+    //openknx.addModule(10, openknxNetwork);
+#endif
     openknx.addModule(7, openknxVirtualButtonModule);
     #ifdef ARDUINO_ARCH_RP2040
     openknx.addModule(8, openknxUsbExchangeModule);
@@ -683,32 +688,35 @@ void setup()
 
     pinMode(8, OUTPUT);
     digitalWrite(8, HIGH);
-    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, 9, 64U));
+    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, 9, PIO_BUFFER));
 
     pinMode(10, OUTPUT);
     digitalWrite(10, HIGH);
-    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, 11, 64U));
+    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, 11, PIO_BUFFER));
 
     pinMode(26, OUTPUT);
     digitalWrite(26, HIGH);
-    openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(SerialPIO::NOPIN, 27, 64U));
+    openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(SerialPIO::NOPIN, 27, PIO_BUFFER));
 
-#elif defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE) || defined(DEVICE_REG1_SEN_MULTI)
+#elif defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE)
 
     pinMode(OKNXHW_REG1_SENSOR_SDA_TX_PIN, OUTPUT);
     digitalWrite(OKNXHW_REG1_SENSOR_SDA_TX_PIN, HIGH);
-    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, 9, 64U)); // Onboard
+    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, 9, PIO_BUFFER)); // Onboard
 
-    #ifdef DEVICE_REG1_SEN_MULTI
+#elif defined(DEVICE_REG1_SEN_MULTI)
+
     pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, OUTPUT);
     digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, HIGH);
-    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, 64U)); // SML Platine A (oben)
+    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, PIO_BUFFER)); // SML Platine A (oben)
 
     pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, OUTPUT);
     digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, HIGH);
-    openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, 64U)); // SML Platine B (unten)
-    #endif
+    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, PIO_BUFFER)); // SML Platine B (unten)
 
+    pinMode(OKNXHW_REG1_SENSOR_SDA_TX_PIN, OUTPUT);
+    digitalWrite(OKNXHW_REG1_SENSOR_SDA_TX_PIN, HIGH);
+    openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(SerialPIO::NOPIN, 9, PIO_BUFFER)); // Onboard
 #elif defined(OKNXHW_REG2_PIPICO_V1_BASE)
 
     pinMode(4, OUTPUT);
@@ -736,13 +744,28 @@ void setup()
 
 #elif defined(DEVICE_SMARTMF_2SML_3BE)
 
+    pinMode(SMARTMF_SML_PWR_PIN, OUTPUT);
+    digitalWrite(SMARTMF_SML_PWR_PIN, HIGH);
+
     pinMode(SMARTMF_SML1_TX_PIN, OUTPUT);
-    pinMode(SMARTMF_SML2_TX_PIN, OUTPUT);
     digitalWrite(SMARTMF_SML1_TX_PIN, HIGH);
+    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, SMARTMF_SML1_RX_PIN, PIO_BUFFER));
+
+    pinMode(SMARTMF_SML2_TX_PIN, OUTPUT);
     digitalWrite(SMARTMF_SML2_TX_PIN, HIGH);
-    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, SMARTMF_SML1_RX_PIN, 64U));
-    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, SMARTMF_SML2_RX_PIN, 64U));
+    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, SMARTMF_SML2_RX_PIN, PIO_BUFFER));
+
+#elif defined(DEVICE_REG2_PIPICO_V1_DD_METER)
+
+    pinMode(OKNXHW_REG2_MSENS_1_SDA0_TX_PIN, OUTPUT);
+    digitalWrite(OKNXHW_REG2_MSENS_1_SDA0_TX_PIN, HIGH);
+    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG2_MSENS_1_SCL0_RX_PIN, PIO_BUFFER));
+
+    pinMode(OKNXHW_REG2_MSENS_2_SDA1_TX_PIN, OUTPUT);
+    digitalWrite(OKNXHW_REG2_MSENS_2_SDA1_TX_PIN, HIGH);
+    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(SerialPIO::NOPIN, OKNXHW_REG2_MSENS_2_SCL1_RX_PIN, PIO_BUFFER));
 #endif
+
 #ifdef W25Q128_FLASH_TEST
     openknx.logger.log("Setup done!");
     openknx.logger.log("Start to test the onboard W25Q128 flash memory");
@@ -753,7 +776,6 @@ void setup()
 #endif
 #ifdef W25Q128_LITTLEFS_WITH_CONFIGURABLE
     testLittleFSWithConfigurable();
-
 #endif
 
 #ifdef EXTERNAL_FLASH_MODULE
