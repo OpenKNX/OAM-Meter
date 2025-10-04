@@ -1,4 +1,3 @@
-#include "GpioBinaryInputModule.h"
 #include "Logic.h"
 #include "MeterModule.h"
 #include "NetworkModule.h"
@@ -7,7 +6,7 @@
 #include "UsbExchangeModule.h"
 
 #ifndef OPENKNX_FILE_TRANSFER_IGNORE
-  #ifdef ARDUINO_ARCH_RP2040
+  #if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_ESP32)
     #include "FileTransferModule.h"
   #endif
 #endif
@@ -21,10 +20,6 @@
 #endif
 
 #define PIO_BUFFER 64U
-
-#ifdef OKNXHW_REG2_DEVICE_DISPLAY
-    #include "GPIOModule.h"
-#endif
 
 #ifdef DEVICE_DISPLAY_MODULE
     #include "DeviceDisplay.h"
@@ -74,9 +69,6 @@ void setup()
 #endif
 #ifdef EXTERNAL_FLASH_MODULE
     openknx.addModule(12, extFlashModule);
-#endif
-#ifdef OKNXHW_REG2_DEVICE_DISPLAY
-    openknx.addModule(20, openknxGPIOModule);
 #endif
 
     openknx.setup();
