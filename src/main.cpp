@@ -22,6 +22,7 @@
 
 void setup()
 {
+    openknx.init();
 
     if (openknx.ledFunctions.useDefaultFunction())
     {
@@ -32,7 +33,6 @@ void setup()
 #endif
     }
 
-    openknx.init();
     openknx.addModule(1, openknxLogic);
     openknx.addModule(2, openknxMeterModule);
 #ifndef ARDUINO_ARCH_ESP32
