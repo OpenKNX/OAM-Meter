@@ -26,10 +26,9 @@ void setup()
 
     if (openknx.ledFunctions.useDefaultFunction())
     {
-        openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO1), OPENKNX_LEDFUNC_BASE_STATE);
 #if defined(DEVICE_PIPICO_BCU_CONNECTOR) || defined(DEVICE_SEN_UP1_8XTH) || defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE) || defined(DEVICE_REG1_SEN_MULTI)
         openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO3), 200); // SML Gesamtstatus
-        openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO2), 220); //BI Status
+        openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO2), 220); // BI Status
 #endif
     }
 
