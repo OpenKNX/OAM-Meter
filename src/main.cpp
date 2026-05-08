@@ -9,8 +9,8 @@
 #ifndef OPENKNX_FILE_TRANSFER_IGNORE
     #include "FileTransferModule.h"
 #endif
+#include "SMLModule.h"
 #ifndef ARDUINO_ARCH_ESP32
-    #include "SMLModule.h"
     #include <SoftwareSerial.h>
 #endif
 
@@ -34,9 +34,9 @@ void setup()
 
     openknx.addModule(1, openknxLogic);
     openknx.addModule(2, openknxMeterModule);
-#ifndef ARDUINO_ARCH_ESP32
+//#ifndef ARDUINO_ARCH_ESP32
     openknx.addModule(3, openknxSMLModule);
-#endif
+//#endif
 #if defined(OPENKNX_BI_GPIO_PINS) && OPENKNX_BI_GPIO_COUNT > 0 && BI_ChannelCount > 0
     openknx.addModule(6, openknxGpioBinaryInputModule);
 #endif
@@ -93,6 +93,21 @@ void setup()
     pinMode(OKNXHW_REG1_SENSOR_SDA_TX_PIN, OUTPUT);
     digitalWrite(OKNXHW_REG1_SENSOR_SDA_TX_PIN, HIGH);
     openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(NOPIN, 9, PIO_BUFFER)); // Onboard
+
+#elif defined(DEVICE_DEV_REG1_LAN_SEN_MULTI_V00_11)
+
+    //pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, OUTPUT);
+    //digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, HIGH);
+    //openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, PIO_BUFFER)); // SML Platine A (oben)
+    Serial1.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN);
+    openknxSMLModule.getChannel(0)->setSerial(&Serial1);
+
+    //pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, OUTPUT);
+    //digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, HIGH);
+    //openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, PIO_BUFFER)); // SML Platine B (unten)
+    Serial2.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN);
+    openknxSMLModule.getChannel(0)->setSerial(&Serial2);
+
 
 #elif defined(DEVICE_SMARTMF_1TE_BE_3CH)
 
