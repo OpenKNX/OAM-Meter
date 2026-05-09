@@ -94,18 +94,12 @@ void setup()
     digitalWrite(OKNXHW_REG1_SENSOR_SDA_TX_PIN, HIGH);
     openknxSMLModule.getChannel(2)->setSerial(new SerialPIO(NOPIN, 9, PIO_BUFFER)); // Onboard
 
-#elif defined(DEVICE_DEV_REG1_LAN_SEN_MULTI_V00_11)
+#elif defined(DEVICE_REG1_LAN_SEN_MULTI)
 
-    //pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, OUTPUT);
-    //digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, HIGH);
-    //openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, PIO_BUFFER)); // SML Platine A (oben)
-    Serial1.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN);
+    Serial1.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN); // SML Platine A (oben)
     openknxSMLModule.getChannel(0)->setSerial(&Serial1);
 
-    //pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, OUTPUT);
-    //digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, HIGH);
-    //openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(NOPIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, PIO_BUFFER)); // SML Platine B (unten)
-    Serial2.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN);
+    Serial2.setPins(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN); // SML Platine B (unten)
     openknxSMLModule.getChannel(0)->setSerial(&Serial2);
 
 
