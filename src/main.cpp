@@ -48,7 +48,7 @@ void setup()
 
     if (openknx.ledFunctions.useDefaultFunction())
     {
-#if defined(DEVICE_PIPICO_BCU_CONNECTOR) || defined(DEVICE_SEN_UP1_8XTH) || defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE) || defined(DEVICE_REG1_SEN_MULTI) || defined(DEVICE_DEV_REG1_LAN_SEN_MULTI_V00_11)
+#if defined(DEVICE_PIPICO_BCU_CONNECTOR) || defined(DEVICE_SEN_UP1_8XTH) || defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE) || defined(DEVICE_REG1_SEN_MULTI) || defined(DEVICE_REG1_LAN_SEN_MULTI)
         openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO3), 200); // SML Gesamtstatus
         openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_INFO2), 600); // BI Status
 #endif
@@ -116,19 +116,14 @@ void setup()
     digitalWrite(OKNXHW_REG2_MSENS_2_SDA1_TX_PIN, HIGH);
     openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(NOPIN, OKNXHW_REG2_MSENS_2_SCL1_RX_PIN, SML_BUFFER));
 
-#elif defined(DEVICE_DEV_REG1_LAN_SEN_MULTI_V00_11)
+#elif defined(DEVICE_REG1_LAN_SEN_MULTI)
 
-
-    pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, OUTPUT);
-    digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN, HIGH);
     Serial1.setRxBufferSize(SML_BUFFER);
-    Serial1.begin(9600, SERIAL_8N1, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, -1);
+    Serial1.begin(9600, SERIAL_8N1, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR1_SDA_TX_PIN);
     openknxSMLModule.getChannel(0)->setSerial(&Serial1); // SML Platine A (oben)
 
-    pinMode(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, OUTPUT);
-    digitalWrite(OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN, HIGH);
     Serial2.setRxBufferSize(SML_BUFFER);
-    Serial2.begin(9600, SERIAL_8N1, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, -1);
+    Serial2.begin(9600, SERIAL_8N1, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SCL_RX_PIN, OKNXHW_REG1_APP_SEN_MULTI_SENSOR2_SDA_TX_PIN);
     openknxSMLModule.getChannel(1)->setSerial(&Serial2); // SML Platine B (unten)
 
 #endif
