@@ -6,8 +6,8 @@ eca6977 v1 lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer.
 3188092 v1dev lib/OFM-LogicModule https://github.com/OpenKNX/OFM-LogicModule.git
 18e88de v1dev lib/OFM-Meter https://github.com/OpenKNX/OFM-Meter.git
 6f8b448 v1dev lib/OFM-Network https://github.com/OpenKNX/OFM-Network.git
-0d69db0 v1dev lib/OFM-SML https://github.com/OpenKNX/OFM-SML.git
+5ad92b9 v1dev lib/OFM-SML https://github.com/OpenKNX/OFM-SML.git
 55119fc v1 lib/OFM-UsbExchange https://github.com/OpenKNX/OFM-UsbExchange.git
 9ea99b5 v1dev lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
-86dc82b v1 lib/OGM-Common https://github.com/OpenKNX/OGM-Common.git
-c2fbef3 v1dev lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig.git
+e7a48eb v1dev lib/OGM-Common https://github.com/OpenKNX/OGM-Common.git
+67aaea7 v1dev lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig.git
