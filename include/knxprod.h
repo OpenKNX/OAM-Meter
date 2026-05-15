@@ -21,16 +21,16 @@
 #define MAIN_FirmwareName "Zaehlermodul (Dev)"
 #define MAIN_OpenKnxId 0xAF
 #define MAIN_ApplicationNumber 5
-#define MAIN_ApplicationVersion 88
+#define MAIN_ApplicationVersion 97
 #define MAIN_FirmwareRevision 0
 #define MAIN_ApplicationEncoding iso-8859-15
 #define MAIN_ParameterSize 7422
 #define MAIN_MaxKoNumber 839
 #define MAIN_OrderNumber "OpenKnxMeter"
-#define BASE_ModuleVersion 23
+#define BASE_ModuleVersion 24
 #define NET_ModuleVersion 6
 #define UCT_ModuleVersion 5
-#define MTR_ModuleVersion 5
+#define MTR_ModuleVersion 6
 #define SML_ModuleVersion 2
 #define BI_ModuleVersion 3
 #define BTN_ModuleVersion 6

@@ -106,11 +106,11 @@ void setup()
     digitalWrite(SMARTMF_SML2_TX_PIN, HIGH);
     openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(NOPIN, SMARTMF_SML2_RX_PIN, SML_BUFFER));
 
-    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 1), 202); // SML02!
-    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 2), 201); // SML01!
-    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 3), 701);
-    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 4), 702);
-    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 5), 703);
+    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 1), 701); // BE1
+    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 2), 702); // BE2
+    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 3), 703); // BE3
+    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 4), 202); // SML02!
+    openknx.ledFunctions.assignLed2Function(openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER + 5), 201); // SML01!
 
 #elif defined(DEVICE_REG2_PIPICO_V1_DD_METER)
 
@@ -140,13 +140,13 @@ uint32_t _debugCore1 = 0;
 void loop()
 {
     openknx.loop();
-    if (knx.configured())
-    {
-        openknxMeterModule.getChannel(0)->counter();
-        openknxMeterModule.getChannel(0)->reference();
-        openknxMeterModule.getChannel(0)->outType();
-        openknxMeterModule.getChannel(0)->outModifier();
-    }
+    // if (knx.configured())
+    // {
+    //     openknxMeterModule.getChannel(0)->counter();
+    //     openknxMeterModule.getChannel(0)->reference();
+    //     openknxMeterModule.getChannel(0)->outType();
+    //     openknxMeterModule.getChannel(0)->outModifier();
+    // }
 
     if (delayCheck(_debugCore0, 1000))
     {
