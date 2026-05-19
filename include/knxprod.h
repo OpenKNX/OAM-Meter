@@ -18,13 +18,13 @@
 #define ETS_ModuleId_BI 7
 #define ETS_ModuleId_BTN 8
 #define ETS_ModuleId_LOG 9
-#define MAIN_FirmwareName "Zaehlermodul (Dev)"
-#define MAIN_OpenKnxId 0xAF
-#define MAIN_ApplicationNumber 5
-#define MAIN_ApplicationVersion 97
+#define MAIN_FirmwareName "Zaehlermodul"
+#define MAIN_OpenKnxId 0xA3
+#define MAIN_ApplicationNumber 4
+#define MAIN_ApplicationVersion 8
 #define MAIN_FirmwareRevision 0
 #define MAIN_ApplicationEncoding iso-8859-15
-#define MAIN_ParameterSize 7422
+#define MAIN_ParameterSize 14453
 #define MAIN_MaxKoNumber 839
 #define MAIN_OrderNumber "OpenKnxMeter"
 #define BASE_ModuleVersion 24
@@ -1787,7 +1787,7 @@
 // Welcher Feiertag ist morgen?
 #define KoLOG_Holiday2                            (knx.getGroupObject(LOG_KoHoliday2))
 
-#define LOG_ChannelCount 20
+#define LOG_ChannelCount 99
 
 // Parameter per channel
 #define LOG_ParamBlockOffset 5642
@@ -3703,7 +3703,7 @@
 #define BASE_KommentarModuleModuleParamSize 0
 #define BASE_KommentarModuleSubmodulesParamSize 0
 #define BASE_KommentarModuleParamSize 0
-#define BASE_KommentarModuleParamOffset 7422
+#define BASE_KommentarModuleParamOffset 14453
 #define BASE_KommentarModuleCalcIndex(index, m1) (index + BASE_KommentarModuleParamOffset + _channelIndex * BASE_KommentarModuleCount * BASE_KommentarModuleParamSize + m1 * BASE_KommentarModuleParamSize)
 
 
