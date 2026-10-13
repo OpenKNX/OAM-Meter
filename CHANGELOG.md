@@ -1,5 +1,14 @@
 # Changes
 
+## Unveröffentlicht
+
+### Fehlerbehebungen
+
+- **OpenKNX UP1 8xSensor**: Der zweite SML-Zähleranschluss (Sensor B)
+  wurde fälschlich erneut an SML-Kanal A gebunden und überschrieb dessen
+  Schnittstelle, sodass SML-Kanal B keine Daten empfing. Sensor B ist
+  jetzt korrekt an SML-Kanal B gebunden. (Danke an Vando-sketch, PR #2)
+
 ## 1.0.0
 
 *(seit 0.6.0, veröffentlicht am 4. Juli 2025)*
