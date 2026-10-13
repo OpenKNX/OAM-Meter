@@ -98,7 +98,7 @@ void setup()
 
     pinMode(OKNXHW_SENSOR_B2_SDA_PIN, OUTPUT);
     digitalWrite(OKNXHW_SENSOR_B2_SDA_PIN, HIGH);
-    openknxSMLModule.getChannel(0)->setSerial(new SerialPIO(NOPIN, OKNXHW_SENSOR_B1_SCL_PIN, SML_BUFFER));
+    openknxSMLModule.getChannel(1)->setSerial(new SerialPIO(NOPIN, OKNXHW_SENSOR_B1_SCL_PIN, SML_BUFFER));
 
 #elif defined(DEVICE_REG1_BASE_V0) || defined(DEVICE_REG1_BASE)
 
