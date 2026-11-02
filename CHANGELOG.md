@@ -1,6 +1,8 @@
 # Changes
 
-## Unveröffentlicht
+## 1.0.1
+
+*(seit 1.0.0)*
 
 ### Fehlerbehebungen
 
@@ -12,6 +14,7 @@
 - **OpenKNX REG1 MultiSensor LAN**: Die drei Binäreingänge
   (6er Schraubklemme A–C) funktionieren in 1.0.0 nicht — sie waren in
   der ETS sichtbar, in der Firmware aber nicht eingebunden.
+
 
 ## 1.0.0
 
